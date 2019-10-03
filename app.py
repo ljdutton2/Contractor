@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request
 import requests
-import json
+from pymongo import MongoClient
+import os
 
+client = MongoClient()
+db = client.Contractor
+products = db.products
 app = Flask(__name__)
 
 @app.route('/')
