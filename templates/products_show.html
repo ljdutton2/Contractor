@@ -4,6 +4,7 @@
 {% block content %}
 
 <h1>{{product.name}}</h1>
+<a href='/plants/{{ product._id }}/delete'>Delete</a>
 <img src="/{{product.picture}}">
 <h3>{{product.price}}</h3>
 <h4>{{product.difficulty}}</h4>
