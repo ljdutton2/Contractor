@@ -18,12 +18,9 @@ products = db.plant_list
 
     
 
-# store = Store(products)
-# store.show_product()
 
 @app.route('/',methods=['GET'])
 def show_home():
-      
     if request.method == 'GET':
         items = products.find()
         plants = []
@@ -33,7 +30,7 @@ def show_home():
             print(x["_id"]) 
         return render_template('all_products.html', product_list=plants)
 
-@app.route('/plants', methods=['POST'])
+@app.route('/plants', methods=['GET', 'POST'])
 def plants_submit():
     """Submit a new plant."""
     plant = {
@@ -45,7 +42,14 @@ def plants_submit():
     }
     print(plant)
     plant_id = plant.insert_one(plant).inserted_id
-    return redirect(url_for('new_plant', plant_id=plant_id))
+    return redirect(url_for('new_plant.html', plant_id=plant_id))
+
+@app.route('/plants/new')
+def playlists_new():
+    """Create a new playlist."""
+    return render_template('new_plant.html',product={})
+
+
 
 @app.route('/products/<product_id>')
 def products_show(product_id):
