@@ -2,13 +2,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form method='GET' action='/products'>
-    <fieldset>
-    <legend>All Products</legend>
+
 <h1>{{product.name}}</h1>
-<h2>{{product.picture}}</h2>
+<img src="/{{product.picture}}">
 <h3>{{product.price}}</h3>
 <h4>{{product.difficulty}}</h4>
-
-   
+<a href='/'>Back to Home</a>
 {% endblock %}

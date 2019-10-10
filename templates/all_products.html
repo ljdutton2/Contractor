@@ -2,11 +2,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2> Featured Plants </h2>
-    {%for product in products %}
-        <li><h3> <a href='products/{{product._id}}'></a>{{ product.name }}</a> </h3>
 
-    {% endfor %}
+{% for product in product_list %}
+<div class="container">
+    <div class="row text-center" style="background-color:lightgrey">
+        <div class="col-md-12 text center">
+                <a href='/'>Back to Home</a>
+                <img src="{{product['picture']}}">
+              <h3 style="padding-right: 10px"><a href="products/{{product['_id']}}">{{product['name']}}</a></h3>
+            </div class="panel-head">
+            <small>{{ product['description'] }}</small>
+            <h5 style="padding-right: 10px">{{product['price']}}</h5>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endfor %}
 {% endblock %}
 
 

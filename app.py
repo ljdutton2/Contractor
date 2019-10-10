@@ -1,72 +1,66 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 from bson.objectid import ObjectId
 from pymongo import MongoClient
 import os
 from pprint import pprint
-
-
-
-host = os.environ.get('MONGODB_URI', 'mongodb://127.0.0.1:27017/Contractor')
-client = MongoClient(host=host)
-db = client.Contractor
-products = db.products
-
-
+#from plant_list import Store
 
 app = Flask(__name__)
 FLASK_APP = app
 
-images = [
- "http://cdn.shopify.com/s/files/1/0038/9405/0868/products/Houseplants_SpiderPlant_Bonnie_6in_1024x1024.jpg?v=1552591517",
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIgg5hzQ3VuR68NZCqyTkSXpfz19BF5Z4Bs9ZxmBBX9Svfx2N7vA&s',
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS7wiQCWofg7KKLvQNU-4ujGoTVBYHUQ-KUyzHCSyWE_Lup-Wn&s',
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY7bXTlRvTj5RWE1u9sTDE3Y4TVI_YeJ3S07KDIBpGeF4XtFra&s',
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6pW5rc--yKDwkD0q3xFiI3R0o2NrK9kUg32SHBUuqvbCG6YGw&s'
-]
 
-plants = [
- {"name": "Spider Plant",
- "picture": images[0],
- "price": "3.99",
- "difficulty": "Easy"},  
- {"name": "Yellow Tulip",
- "picture": images[1],
- "price": "8.99",
- "difficulty": "hard"},  
- {"name": "Assorted Succulents",
- "picture": images[2],
- "price": "1.99",
- "difficulty": "Easy"},  
- {"name": "Sunflowers",
- "picture": images[3],
- "price": "10.00",
- "difficulty": "Medium"},  
- {"name": "Bonsai Tree",
- "picture": images[0],
- "price": "12.99",
- "difficulty": "Very Difficult"},   
-]
+host = os.environ.get('MONGODB_URI', 'mongodb://127.0.0.1:27017/Contractor')
+client = MongoClient(host=host)
+db = client.get_default_database()
+products = db.plant_list
 
 
-@app.route('/')
+    
+
+# store = Store(products)
+# store.show_product()
+
+@app.route('/',methods=['GET'])
 def show_home():
-    return render_template('main_page.html', products=products)
+      
+    if request.method == 'GET':
+        items = products.find()
+        plants = []
+     
+        for x in items:
+            plants.append(x)
+            print(x["_id"]) 
+        return render_template('all_products.html', product_list=plants)
 
-
-@app.route('/view')
-def get_store():
-    for plant in plants:
-        products.insert_one(plant)
-        return render_template('all_products.html', products=products.find())
-
+@app.route('/plants', methods=['POST'])
+def plants_submit():
+    """Submit a new plant."""
+    plant = {
+        'name': request.form.get('name'),
+        'picture': request.form.get('picture'),
+        'price': request.form.get('price'),
+        'difficulty': request.form.get('difficulty'),
+        'created_at': datetime.now()
+    }
+    print(plant)
+    plant_id = plant.insert_one(plant).inserted_id
+    return redirect(url_for('new_plant', plant_id=plant_id))
 
 @app.route('/products/<product_id>')
 def products_show(product_id):
+    print(product_id)
     product = products.find_one({'_id':ObjectId(product_id)})
+    print(product)
     return render_template('products_show.html', product=product)
 
+#delete route#
 
+
+
+@app.route('/test', methods=['GET'])
+def test():
+    return "hi"
 
 
 
