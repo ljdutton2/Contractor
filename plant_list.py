@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 
-
+#dummy (ish) data used to display products 
 product_1 =  {
      "name": "Spider Plant",
  "picture": 'static/Houseplants_SpiderPlant.jpeg',
@@ -45,7 +45,7 @@ product_list = [
     product_4,
     product_5
 ]
-
+#class to create the store by adding to mongodb
 class Store():
     def __init__(self, product):
          self.product = product
