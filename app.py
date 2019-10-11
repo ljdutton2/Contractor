@@ -16,8 +16,8 @@ client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.plant_list
 
-product=Store(plant_list)
-product.show_product()   
+#product=Store(product_list)
+#product.show_product()   
 
 
 @app.route('/',methods=['GET'])
@@ -67,6 +67,7 @@ def plants_delete(plant_id):
     print(product)
     return redirect(url_for('show_home', product=product))
 
+   
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
