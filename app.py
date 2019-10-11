@@ -19,7 +19,7 @@ products = db.plant_list
 # it will be okay - jayce =]
 from plant_list import product_list # step one
 # products.delete_many({})
-products.insertMany(product_list)
+# products.insertMany(product_list) # fucking up
 
     
 
