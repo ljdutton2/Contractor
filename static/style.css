@@ -4,5 +4,31 @@ background-color: lightcyan;
 }
 
 body {
+
 background-color: #E0FFFF;
+}
+img {
+    height: 300px; 
+    width: 300px;
+}
+
+h1 {
+    font-size: 80px;
+    text-align: center;
+
+}
+
+.buttons{
+ 
+ font-size: 30px;
+}
+
+h5 {
+font-size: 30px;
+text-align: center;
+
+}
+
+.row.text-center {
+    background-color: #E0FFFF;
 }
