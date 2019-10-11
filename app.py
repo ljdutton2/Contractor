@@ -15,11 +15,7 @@ host = os.environ.get('MONGODB_URI', 'mongodb://127.0.0.1:27017/Contractor')
 client = MongoClient(host=host)
 db = client.get_default_database()
 products = db.plant_list
-# print("This is the products:", products)
-# it will be okay - jayce =]
-from plant_list import product_list # step one
-# products.delete_many({})
-# products.insertMany(product_list) # fucking up
+
 
     
 
