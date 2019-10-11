@@ -18,8 +18,9 @@ products = db.plant_list
 
 # it will be okay - jayce =]
 from plant_list import product_list
-products.delete_many({})
-products.insert_many(product_list)
+print("Is this working: ", product_list)
+# products.delete_many({})
+# products.insert_many(product_list)
 
     
 
