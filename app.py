@@ -5,14 +5,14 @@ from pymongo import MongoClient
 import os
 from pprint import pprint
 from datetime import datetime
-#from plant_list import Store
+
 
 app = Flask(__name__)
 FLASK_APP = app
 
 
-host = os.environ.get('MONGODB_URI', 'mongodb://127.0.0.1:27017/Contractor')
-client = MongoClient(host=host)
+host = os.environ.get('MONGODB_URI','mongodb://localhost:27017/Contractor')
+client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.plant_list
 
@@ -25,7 +25,7 @@ def show_home():
     if request.method == 'GET':
         items = products.find()
         plants = []
-     
+     #adding the seperate file of hardcoded inventory to an empty list called plants
         for x in items:
             plants.append(x)
             print(x["_id"]) 
@@ -34,12 +34,13 @@ def show_home():
 @app.route('/plants', methods=['POST'])
 def plants_submit():
     """Submit a new plant."""
+    #creating a form so the user is able to add new plants
     plant = {
         'name': request.form.get('plant-name'),
         'description': request.form.get('plant-description'),
         'plant-price': request.form.get('plant-price'),
         'difficulty': request.form.get('difficulty'),
-        # 'created_at': datetime.now()
+       
     }
     print(plant)
     plant_id = products.insert_one(plant).inserted_id
@@ -53,6 +54,7 @@ def plants_new():
 @app.route('/plants/<plant_id>')
 def products_show(plant_id):
     print(plant_id)
+    #necessary mongodb command to gather by the ID
     product = products.find_one({'_id': ObjectId(plant_id)})
     print(product)
     return render_template('products_show.html', product=product)
