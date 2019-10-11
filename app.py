@@ -5,7 +5,7 @@ from pymongo import MongoClient
 import os
 from pprint import pprint
 from datetime import datetime
-
+from plant_list import Store
 
 app = Flask(__name__)
 FLASK_APP = app
@@ -16,8 +16,8 @@ client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.plant_list
 
-
-    
+product=Store(plant_list)
+product.show_product()   
 
 
 @app.route('/',methods=['GET'])
@@ -60,6 +60,7 @@ def products_show(plant_id):
     return render_template('products_show.html', product=product)
 
 @app.route('/plants/<plant_id>/delete')
+# to remove individual plant from main 
 def plants_delete(plant_id):
     print(plant_id)
     product = products.delete_one({'_id': ObjectId(plant_id)})
@@ -68,4 +69,4 @@ def plants_delete(plant_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))

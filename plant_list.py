@@ -46,14 +46,14 @@ product_list = [
     product_5
 ]
 
-# class Store():
-#     def __init__(self, product):
-#         self.product = product
+class Store():
+    def __init__(self, product):
+         self.product = product
     
-#     def show_product(self):
-#         self.product.delete_many({})
+    def show_product(self):
+         self.product.delete_many({})
         
-#         self.product.insert_many(product_list)
+         self.product.insert_many(product_list)
         
-#         for i in self.product.find():
-#             print(product_list)
+         for i in self.product.find():
+             print(product_list)
