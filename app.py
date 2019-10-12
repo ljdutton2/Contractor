@@ -15,8 +15,8 @@ client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.plant_list
 
-# for product in product_list:
-#     products.insert_one(product).inserted_id
+for product in product_list:
+    print(product)
 
 @app.route('/',methods=['GET'])
 def show_home():
