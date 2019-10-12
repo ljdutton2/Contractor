@@ -17,8 +17,8 @@ db = client.get_default_database()
 products = db.plant_list
 
 for product in product_list:
-    print('Testing if this works')
-    print(product)
+    new = products.insert_one(product).inserted_id
+    print(new)
 
 @app.route('/',methods=['GET'])
 def show_home():
