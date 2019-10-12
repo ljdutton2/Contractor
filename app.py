@@ -5,11 +5,9 @@ from pymongo import MongoClient
 import os
 from pprint import pprint
 from datetime import datetime
-from plant_list import Store
 
 app = Flask(__name__)
 FLASK_APP = app
-
 
 host = os.environ.get('MONGODB_URI','mongodb://127.0.0.1:27017/Contractor')
 print('This is the host' + host)
