@@ -12,7 +12,7 @@ FLASK_APP = app
 
 
 host = os.environ.get('MONGODB_URI','mongodb://127.0.0.1:27017/Contractor')
-print(host)
+print('This is the host' + host)
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.plant_list
