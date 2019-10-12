@@ -45,15 +45,3 @@ product_list = [
     product_4,
     product_5
 ]
-#class to create the store by adding to mongodb
-class Store():
-    def __init__(self, product):
-         self.product = product
-    
-    def show_product(self):
-         self.product.delete_many({})
-        
-         self.product.insert_many(product_list)
-        
-         for i in self.product.find():
-             print(product_list)
