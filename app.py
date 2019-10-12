@@ -11,7 +11,8 @@ app = Flask(__name__)
 FLASK_APP = app
 
 
-host = os.environ.get('MONGODB_URI','mongodb://localhost:27017/Contractor')
+host = os.environ.get('MONGODB_URI','mongodb://127.0.0.1:27017/Contractor')
+print(host)
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.plant_list
