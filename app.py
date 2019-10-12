@@ -6,6 +6,7 @@ import os
 from pprint import pprint
 from datetime import datetime
 from plant_list import product_list
+
 app = Flask(__name__)
 FLASK_APP = app
 
@@ -16,6 +17,7 @@ db = client.get_default_database()
 products = db.plant_list
 
 for product in product_list:
+    print('Testing if this works')
     print(product)
 
 @app.route('/',methods=['GET'])
