@@ -10,14 +10,14 @@ app = Flask(__name__)
 FLASK_APP = app
 
 host = os.environ.get('MONGODB_URI','mongodb://127.0.0.1:27017/Contractor')
-print('This is the host' + host)
+print(host)
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.plant_list
 
-#product=Store(product_list)
-#product.show_product()   
-
+for product in product_list:
+    print(product)
+    products.insert_one(product).inserted_id
 
 @app.route('/',methods=['GET'])
 def show_home():

@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-
 #dummy (ish) data used to display products 
 product_1 =  {
      "name": "Spider Plant",
