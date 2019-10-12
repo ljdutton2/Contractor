@@ -5,7 +5,7 @@ from pymongo import MongoClient
 import os
 from pprint import pprint
 from datetime import datetime
-
+from plant_list import product_list
 app = Flask(__name__)
 FLASK_APP = app
 
